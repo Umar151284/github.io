@@ -1,118 +1,529 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VortexVPN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VortexVPN — быстрый и безопасный VPN</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #ffffff;
+      line-height: 1.5;
+    }
 
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
-}
+    a {
+      text-decoration: none;
+    }
 
-h1 {
-  font-size: 36px;
-}
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-p {
-  font-size: 18px;
-  max-width: 600px;
-  margin: 20px auto;
-}
+    .hero {
+      background: linear-gradient(135deg, #081226 0%, #17357a 55%, #2448b8 100%);
+      padding: 80px 0 60px;
+      text-align: center;
+    }
 
-.btn {
-  display: inline-block;
-  padding: 14px 28px;
-  background: #22c55e;
-  color: white;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
 
-.section {
-  padding: 60px 20px;
-  text-align: center;
-}
+    h1 {
+      margin: 0 0 18px;
+      font-size: 42px;
+      line-height: 1.15;
+    }
 
-.card {
-  background: #1e293b;
-  margin: 15px;
-  padding: 20px;
-  border-radius: 15px;
-}
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      font-size: 18px;
+      color: #e8edff;
+    }
 
-.price {
-  font-size: 28px;
-  margin: 15px 0;
-}
-</style>
+    .btn {
+      display: inline-block;
+      padding: 15px 28px;
+      border-radius: 14px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
 
+    .btn-primary {
+      background: #22c55e;
+      color: #ffffff;
+      margin-right: 10px;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    section {
+      padding: 64px 0;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      margin: 0 0 16px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 36px;
+      color: #b8c3e0;
+      font-size: 17px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: #131c35;
+      border: 1px solid #1f2a4a;
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #c6d0ea;
+      font-size: 15px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .price-card {
+      background: #11192f;
+      border: 1px solid #233053;
+      border-radius: 20px;
+      padding: 28px 22px;
+      text-align: center;
+      position: relative;
+    }
+
+    .price-card.popular {
+      border: 2px solid #22c55e;
+      transform: scale(1.02);
+    }
+
+    .popular-label {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #22c55e;
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .price-card h3 {
+      margin: 10px 0;
+      font-size: 24px;
+    }
+
+    .price {
+      font-size: 34px;
+      font-weight: bold;
+      margin: 12px 0 18px;
+    }
+
+    .price-note {
+      color: #9fb0d9;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .price-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 22px;
+      text-align: left;
+      color: #dce4ff;
+    }
+
+    .price-list li {
+      margin-bottom: 10px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .review {
+      background: #121b33;
+      border: 1px solid #223050;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .review p {
+      color: #d5def6;
+      margin-bottom: 16px;
+    }
+
+    .review strong {
+      display: block;
+    }
+
+    .faq {
+      max-width: 850px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: #121b33;
+      border: 1px solid #223050;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: #c9d3ee;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #122146 0%, #1e3a8a 100%);
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .cta p {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      color: #e5ebff;
+    }
+
+    footer {
+      padding: 30px 0 40px;
+      text-align: center;
+      color: #94a3c7;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .features,
+      .pricing,
+      .steps,
+      .reviews,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      .btn {
+        display: block;
+        margin: 10px auto;
+        max-width: 280px;
+      }
+
+      .btn-primary {
+        margin-right: 0;
+      }
+
+      .price-card.popular {
+        transform: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<section class="hero">
-<h1>VortexVPN</h1>
-<p>Быстрый и безопасный VPN без ограничений. Работает в любой стране. Подключение за 1 минуту.</p>
-<a class="btn" href="https://t.me/Vortex2026VPN_bot">Купить VPN</a>
-</section>
+  <section class="hero">
+    <div class="container">
+      <div class="badge">Надёжный доступ без ограничений</div>
+      <h1>VortexVPN — быстрый и безопасный VPN для Android и iPhone</h1>
+      <p>
+        Подключение за 1 минуту, стабильная работа, понятная инструкция и поддержка в Telegram.
+        Подходит для повседневного использования, работы, общения и доступа к нужным сервисам.
+      </p>
 
-<section class="section">
-<h2>Почему выбирают нас</h2>
+      <a class="btn btn-primary" href="https://t.me/Vortex2026VPN_bot" target="_blank">Купить VPN</a>
+      <a class="btn btn-secondary" href="https://t.me/Vortex2026VPN_bot" target="_blank">Написать в поддержку</a>
 
-<div class="card">🚀 Высокая скорость без лагов</div>
-<div class="card">🔒 Полная анонимность</div>
-<div class="card">📱 Работает на Android / iPhone</div>
-<div class="card">🌍 Обход блокировок</div>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>1 минута</strong>
+          Быстрое подключение
+        </div>
+        <div class="stat">
+          <strong>24/7</strong>
+          Поддержка в Telegram
+        </div>
+        <div class="stat">
+          <strong>Android / iPhone</strong>
+          Удобно на телефоне
+        </div>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <section>
+    <div class="container">
+      <h2>Почему выбирают VortexVPN</h2>
+      <p class="section-subtitle">
+        Всё сделано просто: купил, получил инструкцию, подключился и пользуешься без лишних сложностей.
+      </p>
 
-<section class="section">
-<h2>Тарифы</h2>
+      <div class="features">
+        <div class="card">
+          <h3>🚀 Быстрая скорость</h3>
+          <p>Стабильная работа без долгих загрузок и лишних задержек.</p>
+        </div>
+        <div class="card">
+          <h3>🔒 Безопасность</h3>
+          <p>Защита соединения и больше приватности при использовании сети.</p>
+        </div>
+        <div class="card">
+          <h3>🌍 Доступ без ограничений</h3>
+          <p>Удобный доступ к нужным сайтам, сервисам и приложениям.</p>
+        </div>
+        <div class="card">
+          <h3>📱 Простое подключение</h3>
+          <p>Подходит даже новичкам. Всё объясняем пошагово и без сложных слов.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="card">
-<h3>1 месяц</h3>
-<div class="price">299 ₽</div>
-<a class="btn" href="https://t.me/Vortex2026VPN_bot">Купить</a>
-</div>
+  <section>
+    <div class="container">
+      <h2>Тарифы</h2>
+      <p class="section-subtitle">
+        Выбери удобный вариант и переходи в Telegram для получения доступа.
+      </p>
 
-<div class="card">
-<h3>3 месяца</h3>
-<div class="price">799 ₽</div>
-<a class="btn" href="https://t.me/Vortex2026VPN_bot">Купить</a>
-</div>
+      <div class="pricing">
+        <div class="price-card">
+          <h3>1 месяц</h3>
+          <div class="price">299 ₽</div>
+          <div class="price-note">Подойдёт для знакомства</div>
+          <ul class="price-list">
+            <li>✔ Быстрый доступ</li>
+            <li>✔ Инструкция по подключению</li>
+            <li>✔ Поддержка в Telegram</li>
+          </ul>
+          <a class="btn btn-primary" href="https://t.me/Vortex2026VPN_bot" target="_blank">Выбрать</a>
+        </div>
 
-<div class="card">
-<h3>6 месяцев</h3>
-<div class="price">1490 ₽</div>
-<a class="btn" href="https://t.me/Vortex2026VPN_bot">Купить</a>
-</div>
+        <div class="price-card popular">
+          <div class="popular-label">Популярный тариф</div>
+          <h3>3 месяца</h3>
+          <div class="price">799 ₽</div>
+          <div class="price-note">Лучший баланс цены</div>
+          <ul class="price-list">
+            <li>✔ Выгоднее, чем помесячно</li>
+            <li>✔ Быстрое подключение</li>
+            <li>✔ Поддержка и помощь</li>
+          </ul>
+          <a class="btn btn-primary" href="https://t.me/Vortex2026VPN_bot" target="_blank">Выбрать</a>
+        </div>
 
-</section>
+        <div class="price-card">
+          <h3>6 месяцев</h3>
+          <div class="price">1490 ₽</div>
+          <div class="price-note">Максимальная выгода</div>
+          <ul class="price-list">
+            <li>✔ Долгий срок использования</li>
+            <li>✔ Выгодная стоимость</li>
+            <li>✔ Приоритетная поддержка</li>
+          </ul>
+          <a class="btn btn-primary" href="https://t.me/Vortex2026VPN_bot" target="_blank">Выбрать</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section">
-<h2>Как подключиться</h2>
-<p>1. Нажмите “Купить”<br>
-2. Получите конфиг в Telegram<br>
-3. Вставьте в приложение<br>
-4. Готово 🚀</p>
-</section>
+  <section>
+    <div class="container">
+      <h2>Как подключиться</h2>
+      <p class="section-subtitle">
+        Всё максимально просто и занимает всего несколько минут.
+      </p>
 
-<section class="section">
-<h2>Поддержка</h2>
-<p>Если есть вопросы — напишите нам в Telegram</p>
-<a class="btn" href="https://t.me/Vortex2026VPN_bot">Написать</a>
-</section>
+      <div class="steps">
+        <div class="card">
+          <div class="step-number">1</div>
+          <h3>Нажми кнопку</h3>
+          <p>Перейди в Telegram-бота и выбери нужный тариф.</p>
+        </div>
+        <div class="card">
+          <div class="step-number">2</div>
+          <h3>Получи доступ</h3>
+          <p>После оплаты тебе придёт всё необходимое для подключения.</p>
+        </div>
+        <div class="card">
+          <div class="step-number">3</div>
+          <h3>Открой инструкцию</h3>
+          <p>Следуй пошаговому объяснению без лишней путаницы.</p>
+        </div>
+        <div class="card">
+          <div class="step-number">4</div>
+          <h3>Пользуйся</h3>
+          <p>Подключайся и используй VPN на своём устройстве.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Отзывы</h2>
+      <p class="section-subtitle">
+        Этот блок повышает доверие. Сейчас можешь оставить эти отзывы как шаблон, а потом заменить на реальные.
+      </p>
+
+      <div class="reviews">
+        <div class="review">
+          <p>“Подключился быстро, всё понятно объяснили. На телефоне работает стабильно.”</p>
+          <strong>Алексей</strong>
+          <span>Пользователь</span>
+        </div>
+        <div class="review">
+          <p>“Нормальная скорость и без лишней мороки. Поддержка отвечает.”</p>
+          <strong>Ирина</strong>
+          <span>Пользователь</span>
+        </div>
+        <div class="review">
+          <p>“Удобно, что всё через Telegram. Купил, подключил и сразу начал пользоваться.”</p>
+          <strong>Максим</strong>
+          <span>Пользователь</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Частые вопросы</h2>
+
+      <div class="faq">
+        <div class="faq-item">
+          <h3>Подойдёт ли для Android и iPhone?</h3>
+          <p>Да, сайт и подключение рассчитаны на использование с телефона.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Сложно ли подключиться новичку?</h3>
+          <p>Нет. После покупки ты получаешь понятную инструкцию и можешь обратиться в поддержку.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Как быстро я получу доступ?</h3>
+          <p>Обычно всё занимает всего несколько минут после оформления.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Готов подключиться?</h2>
+      <p>
+        Перейди в Telegram и получи доступ к VortexVPN. Если возникнут вопросы, напиши в поддержку.
+      </p>
+      <a class="btn btn-primary" href="https://t.me/Vortex2026VPN_bot" target="_blank">Перейти в Telegram</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 VortexVPN. Все права защищены.
+    </div>
+  </footer>
 
 </body>
 </html>
